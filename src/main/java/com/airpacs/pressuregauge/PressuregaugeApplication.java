@@ -4,7 +4,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,6 +13,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
+import com.fazecast.jSerialComm.SerialPort;
 
 @SpringBootApplication(scanBasePackages = "com.airpacs.pressuregauge")
 public class PressuregaugeApplication extends SpringBootServletInitializer{
@@ -31,10 +32,14 @@ public class PressuregaugeApplication extends SpringBootServletInitializer{
 		
 		startUp();
 		DBConnection.dbInit();
+		
+//		ComPortConnection.setupEventsForComPortIfAvailable();
+		
 //		printExistingData();
 		
 		SpringApplication.run(PressuregaugeApplication.class, args);
 	}
+	
 	
 	public static void startUp() {
 		try {
@@ -56,19 +61,6 @@ public class PressuregaugeApplication extends SpringBootServletInitializer{
 			} else {
 				System.out.println("File already exists.");
 			}
-			
-			/*
-			 * // Connect to Database file. connection =
-			 * DriverManager.getConnection("jdbc:sqlite:C:\\Users\\" + user + "\\
-			 * "+Constant.FOLDER_NAME+"\\"+Constant.DB_NAME);
-			 * 
-			 * if(connection==null)
-			 * System.out.println("SQL Connection is NULL. Not going to create Table.");
-			 * else { // Create Table if does not exist in DB File. statement =
-			 * connection.createStatement();
-			 * statement.executeUpdate("CREATE TABLE IF NOT EXISTS "+Constant.
-			 * TABLE_NAME+" (instrumentID TEXT, value TEXT, time TEXT)"); }
-			 */
 				
 		} catch (Exception e) {
 			e.printStackTrace();

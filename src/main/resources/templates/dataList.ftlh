@@ -8,7 +8,7 @@
 <body>
 	<div class="container">
 		<h1>Pressure Gauge Data</h1>
-		<a href="/create">Create New Data</a>
+		<a href="/getdatafromserialport">Get Data</a>
 		<table class="table">
 			<thead>
 				<tr>

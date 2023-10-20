@@ -19,9 +19,15 @@ public class PressureGaugeController {
 		return "dataList";
 	}
 	
-	@GetMapping("/create")
-	public String createStudentPage(Model model) {
-		
+	@GetMapping("/getdatafromserialport")
+	public String getDatFromSerialPort(Model model) {
+		if(ComPortConnection.comPort==null) {
+			ComPortConnection.setupEventsForComPortIfAvailable();
+			System.out.println("INITIALISINGGGGGGGGGGG");
+			
+		}
+		System.out.println("INSIDEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+		model.addAttribute("dataList", dbConnection.getAllData());
 		return "dataList";
 	}
 
